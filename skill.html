@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill | Portofolio TKJ</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f8fafc;--text:#0f172a;--card:#ffffff;--primary:#2563eb;--footer:#1e293b;
+}
+body.dark{
+  --bg:#0f172a;--text:#e2e8f0;--card:rgba(30,41,59,0.8);--primary:#2563eb;--footer:#111827;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);transition:.4s;}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 80px;background:rgba(255,255,255,0.6);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;transition:.4s;}
+nav a{margin:0 15px;text-decoration:none;color:var(--text);font-weight:500;}
+nav a:hover{color:var(--primary);}
+.toggle{background:var(--primary);border:none;color:white;padding:6px 15px;border-radius:20px;cursor:pointer;transition:.3s;}
+.toggle:hover{transform:scale(1.1);}
+.container{max-width:800px;margin:auto;padding:80px;}
+h2{margin-bottom:40px; opacity:0; transform:translateY(30px); transition:0.8s;}
+.skill{margin-bottom:25px; opacity:0; transform:translateY(30px); transition:0.8s;}
+.skill p{margin-bottom:8px; font-weight:500;}
+.progress{height:12px;background:#cbd5e1;border-radius:20px;overflow:hidden;}
+.progress span{display:block;height:100%;width:0;background:var(--primary);transition:2s;}
+footer{margin-top:40px;text-align:center;padding:20px;background:var(--footer);color:white;box-shadow:0 -3px 10px rgba(0,0,0,.2);}
+.fade-text.visible{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+<nav>
+<div><strong>Portofolio TKJ</strong></div>
+<div>
+<a href="index.html">Beranda</a>
+<a href="tentang.html">Tentang</a>
+<a href="skill.html">Skill</a>
+<a href="kontak.html">Kontak Saya</a>
+<button class="toggle" id="themeToggle">🌙</button>
+</div>
+</nav>
+
+<div class="container">
+<h2 class="fade-text">Keahlian Teknis</h2>
+
+<div class="skill fade-text"><p>Perakitan Komponen Komputer</p><div class="progress"><span data-width="95%"></span></div></div>
+<div class="skill fade-text"><p>Instalasi Operating System</p><div class="progress"><span data-width="90%"></span></div></div>
+<div class="skill fade-text"><p>Konfigurasi Jaringan</p><div class="progress"><span data-width="85%"></span></div></div>
+<div class="skill fade-text"><p>Firewall & Keamanan Jaringan</p><div class="progress"><span data-width="80%"></span></div></div>
+<div class="skill fade-text"><p>Linux Debian</p><div class="progress"><span data-width="75%"></span></div></div>
+<div class="skill fade-text"><p>Instalasi LAN</p><div class="progress"><span data-width="80%"></span></div></div>
+<div class="skill fade-text"><p>HTML & CSS</p><div class="progress"><span data-width="70%"></span></div></div>
+<div class="skill fade-text"><p>Python Dasar</p><div class="progress"><span data-width="65%"></span></div></div>
+<div class="skill fade-text"><p>Perangkat Jaringan</p><div class="progress"><span data-width="60%"></span></div></div>
+<div class="skill fade-text"><p>Server</p><div class="progress"><span data-width="55%"></span></div></div>
+
+</div>
+
+<footer>© 2026 Rizqi Evan Kurniansyah | All Rights Reserved</footer>
+
+<script>
+// Dark Mode Persisten
+const toggleBtn=document.getElementById('themeToggle');
+if(localStorage.getItem('theme')==='dark'){document.body.classList.add('dark');}
+toggleBtn.addEventListener('click',()=>{
+  document.body.classList.toggle('dark');
+  localStorage.setItem('theme',document.body.classList.contains('dark')?'dark':'light');
+});
+
+// Fade In/Out Teks
+const faders=document.querySelectorAll('.fade-text');
+const appearOptions={threshold:0.2};
+const appearOnScroll=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting){entry.target.classList.remove('visible');}
+    else{entry.target.classList.add('visible');}
+  });
+}, appearOptions);
+faders.forEach(fader=>appearOnScroll.observe(fader));
+
+// Progress Bar Animasi saat muncul
+window.addEventListener('load',()=>{
+  document.querySelectorAll('.progress span').forEach(el=>{
+    el.style.width = el.dataset.width;
+  });
+});
+</script>
+</body>
+</html>

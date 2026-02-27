@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tentang | Portofolio TKJ</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f8fafc; --text: #0f172a; --card: #ffffff; --primary: #2563eb; --footer: #1e293b;
+}
+body.dark {
+  --bg: #0f172a; --text: #e2e8f0; --card: rgba(30,41,59,.8); --footer: #111827;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif; background:var(--bg); color:var(--text); transition:.4s; overflow-x:hidden;}
+nav{display:flex; justify-content:space-between; align-items:center; padding:20px 80px; background:rgba(255,255,255,.3); backdrop-filter:blur(10px); position:sticky; top:0; z-index:1000; transition:.4s;}
+nav a{margin:0 15px; text-decoration:none; color:var(--text); font-weight:500;}
+nav a:hover{color:var(--primary);}
+.toggle{background:var(--primary); border:none; color:white; padding:6px 15px; border-radius:20px; cursor:pointer; transition:.3s;}
+.toggle:hover{transform:scale(1.1);}
+.container{max-width:800px; margin:60px auto 40px; padding:0 20px;}
+h2{text-align:center;margin-bottom:20px;}
+.biodata{text-align:justify; margin-bottom:30px;}
+.biodata p{margin:5px 0; font-weight:500;}
+.shape-text{
+  padding:20px;
+  border-radius:20px;
+  background:var(--card);
+  box-shadow:0 5px 15px rgba(0,0,0,.1);
+  text-align:justify;
+  line-height:1.6;
+  font-weight:500;
+}
+footer{
+  margin-top:40px; padding:20px; background:var(--footer); color:white; text-align:center;
+  box-shadow:0 -3px 10px rgba(0,0,0,.2);
+}
+.fade-text{opacity:0; transform:translateY(30px); transition:opacity .8s ease, transform .8s ease;}
+.fade-text.visible{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+<nav>
+  <div><strong>Portofolio TKJ</strong></div>
+  <div>
+    <a href="index.html" class="fade-text">Beranda</a>
+    <a href="tentang.html" class="fade-text">Tentang</a>
+    <a href="skill.html" class="fade-text">Skill</a>
+    <a href="kontak.html" class="fade-text">Kontak Saya</a>
+    <button class="toggle fade-text" id="themeToggle">🌙</button>
+  </div>
+</nav>
+
+<div class="container fade-text">
+  <h2 class="fade-text">Tentang Saya</h2>
+  
+  <div class="biodata fade-text">
+    <p><b>Nama:</b> Rizqi Evan Kurniansyah</p>
+    <p><b>Sekolah:</b> SMK Negeri 1 Pogalan</p>
+    <p><b>Kelas:</b> X TKJ 1</p>
+    <p><b>Tempat, Tanggal Lahir:</b> Trenggalek, 07 Desember 2009</p>
+  </div>
+  
+  <div class="shape-text fade-text">
+    Saya adalah siswa Teknik Komputer dan Jaringan yang berfokus pada pengembangan kemampuan jaringan komputer dan sistem server. Selain mempelajari instalasi dan konfigurasi jaringan, saya juga mendalami manajemen server, keamanan jaringan, serta troubleshooting perangkat keras dan lunak. Saya memiliki semangat belajar tinggi, selalu mencoba mengikuti perkembangan teknologi terbaru, dan ingin membangun karir profesional di bidang IT dengan keahlian yang matang dan terpercaya. Dalam keseharian, saya aktif dalam praktik lab jaringan, simulasi server, dan ikut serta menggali teknologi informasi untuk meningkatkan skill dan pengalaman praktis.
+  </div>
+</div>
+
+<footer class="fade-text">© Rizqi Evan Kurniansyah | All Rights Reserved</footer>
+
+<script>
+const toggleBtn=document.getElementById('themeToggle');
+if(localStorage.getItem('theme')==='dark'){document.body.classList.add('dark');}
+toggleBtn.addEventListener('click',()=>{
+  document.body.classList.toggle('dark');
+  localStorage.setItem('theme',document.body.classList.contains('dark')?'dark':'light');
+});
+
+const faders=document.querySelectorAll('.fade-text');
+const appearOptions={threshold:0.2};
+const appearOnScroll=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting){entry.target.classList.remove('visible');}
+    else{entry.target.classList.add('visible');}
+  });
+}, appearOptions);
+faders.forEach(fader=>appearOnScroll.observe(fader));
+</script>
+</body>
+</html>
